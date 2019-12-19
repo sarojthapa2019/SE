@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master-layout/master_layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="author" content="Saroj">
+    <link rel="icon" href="favicon.ico">
+    <link href="css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <title>Add Product</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div>
+        <form method="post" action="/product/save" th:object="${product}">
+            <fieldset>
+                <legend>Add New product</legend>
+                <input type="hidden" name="productId" th:value="${product.productId}">
+                <div class="form-group">
+                    <label for="productNumber" >Product Number</label>
+                        <span th:if="${#fields.hasErrors('productNumber')}" th:errors="*{productNumber}"
+                              class="alert alert-danger"></span>
+                        <input type="number" name="productNumber" placeholder="Enter product number"  th:value="${product.productNumber}" class="form-control" id="productNumber">
+
+                </div>
+                <div class="form-group">
+                    <label for="name" >Name</label>
+                    <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                          class="alert alert-danger"></span>
+                    <input type="text" name="name" placeholder="Enter name"  th:value="${product.name}" class="form-control" id="name">
+
+                </div>
+
+
+                <div class="form-group">
+                    <label for="supplier">Select Supplier</label>
+                    <select  th:field="*{supplier}" name="supplier" class="form-control " id="supplier">
+                        <option th:each="i : ${supplierList}" th:value="${i.supplierId}"
+                        th:text="${i.name}">1</option>
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="unitPrice" >Unit Price</label>
+                    <span th:if="${#fields.hasErrors('unitPrice')}" th:errors="*{unitPrice}"
+                          class="alert alert-danger"></span>
+                    <input type="number" name="unitPrice" placeholder="Enter Unit price"
+                           th:value="${product.unitPrice}" class="form-control" id="unitPrice">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="quantityInStock" >Quantity in Stock</label>
+                    <span th:if="${#fields.hasErrors('quantityInStock')}" th:errors="*{quantityInStock}"
+                          class="alert alert-danger"></span>
+                    <input type="number" name="unitPrice" placeholder="Enter quantity in stock"
+                           th:value="${product.quantityInStock}" class="form-control" id="quantityInStock">
+
+                </div>
+
+                <div class="form-group">
+                    <label for="dateSupplied" >Date Supplied</label>
+<!--                    <span th:if="${#fields.hasErrors('dateSupplied')}" th:errors="*{quantityInStock}"-->
+<!--                          class="alert alert-danger"></span>-->
+                    <input type="date" name="dateSupplied" placeholder="Enter date supplied"
+                           th:value="${product.dateSupplied}" class="form-control" id="dateSupplied">
+
+                </div>
+
+
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </fieldset>
+        </form>
+    </div>
+
+</th:block>
+
+</body>
+</html>

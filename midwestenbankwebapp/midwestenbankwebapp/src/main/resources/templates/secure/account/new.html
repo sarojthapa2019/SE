@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{secure/layout/master-layout}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/account/account.css}"/>
+    <title>MidWesTen Bank - New Account Opening Form</title>
+</head>
+<body>
+    <th:block layout:fragment="content">
+        <form id="newAccountForm" method="post" action="/midwestenbank/secure/accounts/new" th:object="${account}">
+            <fieldset>
+                <legend>New Account Form</legend>
+                <input type="hidden" name="accountId" th:value="${account.accountId}"/>
+                <div class="form-group">
+                    <label for="customer">Customer:</label>
+                    <span th:if="${#fields.hasErrors('customer')}" th:errors="*{customer}"
+                          class="alert alert-danger"></span>
+                    <select name="customer" id="customer" class="form-control" required="required" autofocus>
+                        <option value="">Select a customer</option>
+                        <option th:each="customer : ${customers}" th:value="${customer.customerId}" th:text="${customer.customerNumber}+' - '+${customer.firstName}+' '+${customer.middleName}+' '+${customer.lastName}"></option>
+                    </select>
+                </div>
+                <div class="form-group" style="margin-top: 1em;">
+                    <label for="accountNumber">Account Number:</label>
+                    <span th:if="${#fields.hasErrors('accountNumber')}" th:errors="*{accountNumber}"
+                          class="alert alert-danger"></span>
+                    <input id="accountNumber" name="accountNumber" type="text" class="form-control" value=""
+                           th:value="${account.accountNumber}" />
+                </div>
+                <div class="form-group">
+                    <label for="accountType">Type of Account:</label>
+                    <span th:if="${#fields.hasErrors('accountType')}" th:errors="*{accountType}"
+                          class="alert alert-danger"></span>
+                    <select name="accountType" id="accountType" class="form-control" required="required">
+                        <option value="">Select the type of Account</option>
+                        <option th:each="accountType : ${accountTypes}" th:value="${accountType.accountTypeId}" th:text="${accountType.accountTypeName}"></option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="balance">Balance (in US Dollars and Cents):</label>
+                    <span th:if="${#fields.hasErrors('balance')}" th:errors="*{balance}"
+                          class="alert alert-danger"></span>
+                    <input id="balance" name="balance" type="text" class="form-control" th:value="${account.balance}" required="required">
+                </div>
+
+                <div style="float:right;">
+                    <a href="/midwestenbank/secure/accounts/list" class="btn btn-outline-warning">Cancel</a>&nbsp;&nbsp;&nbsp;
+                    <button id="btnSubmit" type="submit" class="btn btn-outline-primary">Create Account</button>
+                </div>
+            </fieldset>
+        </form>
+    </th:block>
+
+    <th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>

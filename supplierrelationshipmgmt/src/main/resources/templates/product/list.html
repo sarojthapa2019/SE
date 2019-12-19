@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{master-layout/master_layout}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="">
+    <meta name="author" content="Saroj">
+    <link rel="icon" href="favicon.ico">
+    <link href="css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/bootstrap.min.css}">
+    <title>Supplier Relationship Management App</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div>
+       <h3>All Products</h3>
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th scope="col">S.N.</th>
+                <th scope="col">Product Number</th>
+                <th scope="col">Product Name</th>
+                <th scope="col">Supplier</th>
+                <th scope="col">Unit Price</th>
+                <th scope="col">Quantity in Stock</th>
+                <th scope="col">Date Supplied</th>
+
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr class="table-danger" th:each="p,i:${product}">
+                <th scope="row" th:text="${i.count}"></th>
+                <td th:text="${p.productNumber}"></td>
+                <td th:text="${p.name}"></td>
+                <td th:text="${p.supplier.name}"></td>
+                <td th:text="${p.unitPrice}"></td>
+                <td th:text="${p.quantityInStock}"></td>
+                <td th:text="${p.dateSupplied}"></td>
+
+
+            </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+
+</th:block>
+
+</body>
+</html>

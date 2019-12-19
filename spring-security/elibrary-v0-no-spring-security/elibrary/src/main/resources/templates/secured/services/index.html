@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.thymeleaf.org"
+      layout:decorate="~{secured/layouts/master-layout}">
+<head>
+    <title>eLibrary - a SpringWebMVC demo - Services</title>
+</head>
+<body>
+    <div layout:fragment="content" style="padding-top:1em;" class="container">
+        <p>&nbsp;</p>
+        <h3>eLibrary - Services</h3>
+        <hr/>
+        <p>&nbsp;</p>
+        <div class="row">
+            <div class="col-md-6">
+                <div style="font-size: 1em;">
+            <!--        <img th:src="@{/images/banner1.png}"/><br/><br/>-->
+                    <div class="card border-primary mb-3" style="max-width: 20rem;">
+                        <a style="text-decoration: inherit;" href="/elibrary/secured/services/book/list">
+                            <div style="color: #1a1a1a;" class="card-header">Books</div>
+                            <div class="card-body">
+                                <h4 class="card-title">Our Collection of Books</h4>
+                                <p class="card-text">
+                                    Browse our large collection of books, and make your selection from
+                                    many popular titles, covering a wide variety of subjects.
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div style="font-size: 1em;">
+                    <!--        <img th:src="@{/images/banner1.png}"/><br/><br/>-->
+                    <div class="card border-primary mb-3" style="max-width: 20rem;">
+                            <div class="card-header">System Administration</div>
+                            <div class="card-body">
+                                <h4 class="card-title">Admin Tools</h4>
+                                <p class="card-text">
+                                    <a href="/elibrary/secured/services/admin/usrmgmt">
+                                        Manage Users and Membership
+                                    </a>
+                                </p>
+                                <p class="card-text">
+<!--                                    <a href="/elibrary/secured/services/admin/versioninfo">-->
+                                    <a href="#">
+                                        Version Information
+                                    </a>
+                                </p>
+                                <p class="card-text">
+                                    <a href="#">
+                                        Misc
+                                    </a>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{secure/layout/master-layout}">
+<head>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/account/account.css}"/>
+    <title>MidWesTen Bank - Accounts</title>
+</head>
+<body>
+<th:block layout:fragment="content">
+    <div>
+        <span style="font-size: 1.5em">List of All Accounts</span>
+        <span style="float:right;">
+                <a class="btn btn-outline-primary btn-lg" href="/midwestenbank/secure/accounts/new">Open a New Account</a>
+            </span>
+    </div>
+
+    <p>&nbsp;</p>
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Account Number</th>
+            <th scope="col">Customer</th>
+            <th scope="col">Type of Account</th>
+            <th scope="col">Balance</th>
+        </tr>
+        </thead>
+        <tbody>
+        <!-- Alternative non-obstrusive js solution for <tr onclick>:
+            HTML markup: <tr data-href="some-url">
+            JS function using JQuery: $('tr[data-href]').on("click", function() {
+                                        document.location = $(this).data('href');
+                                    });
+         -->
+        <!--<tr class="datarow" th:each="product,iterStat : ${products}" th:onclick="@{document.location='/prodmgmt/products/edit/{productId}'(productId=${product.productId})}">-->
+        <tr class="datarow" th:each="account,iterStat : ${accounts}" th:onclick="@{document.location='#'}">
+            <th scope="row" th:text="${iterStat.count}+'.'"></th>
+            <td th:text="${account.accountNumber}"></td>
+            <td th:text="${account.customer.customerNumber}+' - '+${account.customer.firstName}+' '+${account.customer.middleName}+' '+${account.customer.lastName}"></td>
+            <td th:text="${account.accountType.accountTypeName}"></td>
+            <td th:text="${#numbers.formatCurrency(account.balance)}"></td>
+        </tr>
+        <tr style="background-color: #dedede;">
+            <td th:colspan="5" style="padding-top:2em;padding-bottom:1em;text-decoration:none;font-weight: bold;font-size: xx-large;" th:text="'Net Liquidity: '+${#numbers.formatCurrency(netliquidity)}"></td>
+        </tr>
+        </tbody>
+    </table>
+</th:block>
+
+<th:block layout:fragment="footer"></th:block>
+
+</body>
+</html>
